@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.noranekoit.made.submission1.BuildConfig
 import com.noranekoit.made.submission1.R
 import com.noranekoit.made.submission1.core.data.source.local.entity.MovieEntity
+import com.noranekoit.made.submission1.core.domain.model.Moviem
 import com.noranekoit.made.submission1.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.databinding.ActivityDetailMovieBinding
 
@@ -25,11 +26,11 @@ class DetailMovieActivity : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(this)
         detailMovieViewModel = ViewModelProvider(this, factory)[DetailMovieViewModel::class.java]
 
-        val detailMovie = intent.getParcelableExtra<MovieEntity>(EXTRA_DATA)
+        val detailMovie = intent.getParcelableExtra<Moviem>(EXTRA_DATA)
         showDetailMovie(detailMovie)
     }
 
-    private fun showDetailMovie(detailMovie: MovieEntity?){
+    private fun showDetailMovie(detailMovie: Moviem?){
         detailMovie?.let {
             supportActionBar?.title = detailMovie.title
             binding.content.tvDetailDescription.text = detailMovie.description

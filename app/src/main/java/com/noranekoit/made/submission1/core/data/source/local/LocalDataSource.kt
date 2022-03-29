@@ -14,7 +14,7 @@ class LocalDataSource private constructor(private val movieDao: MovieDao){
             }
     }
 
-    fun getAllMovie(): LiveData<List<MovieEntity>> = movieDao.getAllMovie()
+    fun getAllMoviePopular(): LiveData<List<MovieEntity>> = movieDao.getAllMovie()
 
     fun getFavoriteMovie(): LiveData<List<MovieEntity>> = movieDao.getFavoriteMovie()
 

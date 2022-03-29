@@ -1,8 +1,8 @@
 package com.noranekoit.made.submission1.core.utils
 
-import com.noranekoit.made.submission1.core.data.MovieRepository
 import com.noranekoit.made.submission1.core.data.source.local.entity.MovieEntity
 import com.noranekoit.made.submission1.core.data.source.remote.response.MovieResponse
+import com.noranekoit.made.submission1.core.domain.model.Moviem
 
 object DataMapper {
     fun mapResponsesToEntities(input: List<MovieResponse>): List<MovieEntity> {
@@ -21,4 +21,27 @@ object DataMapper {
         }
         return movieList
     }
+
+    fun mapEntitiesToDomain(input: List<MovieEntity>):List<Moviem> =
+        input.map {
+            Moviem(
+                id = it.id,
+                title = it.title,
+                description = it.description,
+                dateAiring = it.dateAiring,
+                score = it.score,
+                imagePath = it.imagePath,
+                isFavorite = it.isFavorite
+            )
+        }
+
+    fun mapDomainToEntity(input: Moviem) = MovieEntity(
+        id = input.id,
+        title = input.title,
+        description = input.description,
+        dateAiring = input.dateAiring,
+        score = input.score,
+        imagePath = input.imagePath,
+        isFavorite = input.isFavorite
+    )
 }

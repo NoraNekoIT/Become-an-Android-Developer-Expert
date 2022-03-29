@@ -1,11 +1,12 @@
 package com.noranekoit.made.submission1.core.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.noranekoit.made.submission1.core.data.source.local.LocalDataSource
-import com.noranekoit.made.submission1.core.data.source.local.entity.MovieEntity
 import com.noranekoit.made.submission1.core.data.source.remote.RemoteDataSource
 import com.noranekoit.made.submission1.core.data.source.remote.network.ApiResponse
 import com.noranekoit.made.submission1.core.data.source.remote.response.MovieResponse
+import com.noranekoit.made.submission1.core.domain.model.Moviem
 import com.noranekoit.made.submission1.core.utils.AppExecutors
 import com.noranekoit.made.submission1.core.utils.DataMapper
 
@@ -22,18 +23,20 @@ class MovieRepository private constructor(
             remoteDataSource: RemoteDataSource,
             localDataSource: LocalDataSource,
             appExecutors: AppExecutors
-        ): MovieRepository = Companion.instance ?: synchronized(this) {
+        ): MovieRepository = instance ?: synchronized(this) {
             instance ?: MovieRepository(remoteDataSource, localDataSource, appExecutors)
         }
     }
 
-    fun getMoviePopularAll(): LiveData<Resource<List<MovieEntity>>> =
-    object : NetworkBoundResource<List<MovieEntity>, List<MovieResponse>>(appExecutors){
-        override fun loadFromDB(): LiveData<List<MovieEntity>> {
-            return localDataSource.getAllMovie()
+    fun getMoviePopularAll(): LiveData<Resource<List<Moviem>>> =
+    object : NetworkBoundResource<List<Moviem>, List<MovieResponse>>(appExecutors){
+        override fun loadFromDB(): LiveData<List<Moviem>> {
+            return Transformations.map(localDataSource.getAllMoviePopular()){
+             DataMapper.mapEntitiesToDomain(it)
+            }
         }
 
-        override fun shouldFetch(data: List<MovieEntity>?): Boolean =
+        override fun shouldFetch(data: List<Moviem>?): Boolean =
             data == null || data.isEmpty()
 
 
@@ -48,13 +51,16 @@ class MovieRepository private constructor(
 
     }.asLiveData()
 
-    fun getFavoriteMovie() : LiveData<List<MovieEntity>>{
-        return localDataSource.getFavoriteMovie()
+    fun getFavoriteMovie() : LiveData<List<Moviem>>{
+        return Transformations.map(localDataSource.getFavoriteMovie()){
+            DataMapper.mapEntitiesToDomain(it)
+        }
     }
 
-    fun setFavoriteMovie(movie: MovieEntity, state: Boolean){
+    fun setFavoriteMovie(movie: Moviem, state: Boolean){
+        val movieEntity = DataMapper.mapDomainToEntity(movie)
         appExecutors.diskIO().execute{
-            localDataSource.setFavoriteMovie(movie,state)
+            localDataSource.setFavoriteMovie(movieEntity,state)
         }
     }
 }
