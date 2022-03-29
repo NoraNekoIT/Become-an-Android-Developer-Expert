@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.noranekoit.made.submission1.core.data.MovieRepository
 import com.noranekoit.made.submission1.core.di.Injection
+import com.noranekoit.made.submission1.core.domain.usecase.MovieUseCase
 import com.noranekoit.made.submission1.detail.DetailMovieActivity
 import com.noranekoit.made.submission1.detail.DetailMovieViewModel
 import com.noranekoit.made.submission1.favorite.FavoriteViewModel
 import com.noranekoit.made.submission1.home.HomeViewModel
 
-class ViewModelFactory private constructor(private val movieRepository: MovieRepository) :
+class ViewModelFactory private constructor(private val movieUseCase: MovieUseCase) :
     ViewModelProvider.NewInstanceFactory() {
         companion object{
             @Volatile
@@ -21,7 +22,7 @@ class ViewModelFactory private constructor(private val movieRepository: MovieRep
                     ?: synchronized(this){
                         instance
                             ?:ViewModelFactory(
-                                Injection.provideRepository(
+                                Injection.provideMovieUseCase(
                                     context
                                 )
                             )
@@ -32,13 +33,13 @@ class ViewModelFactory private constructor(private val movieRepository: MovieRep
     override fun <T: ViewModel> create(modelClass: Class<T>):T =
         when{
             modelClass.isAssignableFrom(HomeViewModel::class.java)->{
-                HomeViewModel(movieRepository)as T
+                HomeViewModel(movieUseCase)as T
             }
             modelClass.isAssignableFrom(DetailMovieViewModel::class.java)->{
-                DetailMovieViewModel(movieRepository) as T
+                DetailMovieViewModel(movieUseCase) as T
             }
             modelClass.isAssignableFrom(FavoriteViewModel::class.java)->{
-                FavoriteViewModel(movieRepository) as T
+                FavoriteViewModel(movieUseCase) as T
             }
             else -> throw  Throwable("Unknown ViewModel class: " + modelClass.name)
         }

@@ -1,8 +1,8 @@
 package com.noranekoit.made.submission1.favorite
 
 import androidx.lifecycle.ViewModel
-import com.noranekoit.made.submission1.core.data.MovieRepository
+import com.noranekoit.made.submission1.core.domain.usecase.MovieUseCase
 
-class FavoriteViewModel(movieRepository: MovieRepository):ViewModel() {
-    val favoriteMovie = movieRepository.getFavoriteMovie()
+class FavoriteViewModel(movieUseCase: MovieUseCase):ViewModel() {
+    val favoriteMovie = movieUseCase.getFavoriteMovie()
 }

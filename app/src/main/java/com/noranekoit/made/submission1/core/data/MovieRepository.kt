@@ -7,6 +7,7 @@ import com.noranekoit.made.submission1.core.data.source.remote.RemoteDataSource
 import com.noranekoit.made.submission1.core.data.source.remote.network.ApiResponse
 import com.noranekoit.made.submission1.core.data.source.remote.response.MovieResponse
 import com.noranekoit.made.submission1.core.domain.model.Moviem
+import com.noranekoit.made.submission1.core.domain.repository.IMovieRepository
 import com.noranekoit.made.submission1.core.utils.AppExecutors
 import com.noranekoit.made.submission1.core.utils.DataMapper
 
@@ -14,7 +15,7 @@ class MovieRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
-) {
+):IMovieRepository {
     companion object {
         @Volatile
         private var instance: MovieRepository? = null
@@ -28,7 +29,7 @@ class MovieRepository private constructor(
         }
     }
 
-    fun getMoviePopularAll(): LiveData<Resource<List<Moviem>>> =
+    override fun getMoviePopularAll(): LiveData<Resource<List<Moviem>>> =
     object : NetworkBoundResource<List<Moviem>, List<MovieResponse>>(appExecutors){
         override fun loadFromDB(): LiveData<List<Moviem>> {
             return Transformations.map(localDataSource.getAllMoviePopular()){
@@ -51,13 +52,13 @@ class MovieRepository private constructor(
 
     }.asLiveData()
 
-    fun getFavoriteMovie() : LiveData<List<Moviem>>{
+    override fun getFavoriteMovie() : LiveData<List<Moviem>>{
         return Transformations.map(localDataSource.getFavoriteMovie()){
             DataMapper.mapEntitiesToDomain(it)
         }
     }
 
-    fun setFavoriteMovie(movie: Moviem, state: Boolean){
+    override fun setFavoriteMovie(movie: Moviem, state: Boolean){
         val movieEntity = DataMapper.mapDomainToEntity(movie)
         appExecutors.diskIO().execute{
             localDataSource.setFavoriteMovie(movieEntity,state)

@@ -1,8 +1,8 @@
 package com.noranekoit.made.submission1.home
 
 import androidx.lifecycle.ViewModel
-import com.noranekoit.made.submission1.core.data.MovieRepository
+import com.noranekoit.made.submission1.core.domain.usecase.MovieUseCase
 
-class HomeViewModel(movieRepository: MovieRepository):ViewModel() {
-    val movie = movieRepository.getMoviePopularAll()
+class HomeViewModel(movieUseCase: MovieUseCase):ViewModel() {
+    val movie = movieUseCase.getMoviePopularAll()
 }
