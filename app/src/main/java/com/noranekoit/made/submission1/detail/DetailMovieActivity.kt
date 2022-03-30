@@ -2,12 +2,12 @@ package com.noranekoit.made.submission1.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.noranekoit.made.submission1.BuildConfig
+import com.noranekoit.made.submission1.MyApplication
 import com.noranekoit.made.submission1.R
-import com.noranekoit.made.submission1.core.data.source.local.entity.MovieEntity
 import com.noranekoit.made.submission1.core.domain.model.Moviem
 import com.noranekoit.made.submission1.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.databinding.ActivityDetailMovieBinding
@@ -16,15 +16,18 @@ class DetailMovieActivity : AppCompatActivity() {
     companion object{
         const val EXTRA_DATA ="extra_data"
     }
-    private lateinit var detailMovieViewModel: DetailMovieViewModel
+    private lateinit var factory: ViewModelFactory
+
+    private val detailMovieViewModel: DetailMovieViewModel by viewModels {
+        factory
+    }
     private lateinit var binding: ActivityDetailMovieBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailMovieBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val factory = ViewModelFactory.getInstance(this)
-        detailMovieViewModel = ViewModelProvider(this, factory)[DetailMovieViewModel::class.java]
 
         val detailMovie = intent.getParcelableExtra<Moviem>(EXTRA_DATA)
         showDetailMovie(detailMovie)

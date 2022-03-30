@@ -1,30 +1,41 @@
 package com.noranekoit.made.submission1.favorite
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.noranekoit.made.submission1.R
+import com.noranekoit.made.submission1.MyApplication
 import com.noranekoit.made.submission1.core.ui.MovieAdapter
 import com.noranekoit.made.submission1.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.databinding.FragmentFavoriteBinding
 import com.noranekoit.made.submission1.detail.DetailMovieActivity
+import javax.inject.Inject
 
 class FavoriteFragment : Fragment() {
-    private lateinit var favoriteViewModel: FavoriteViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val favoriteViewModel: FavoriteViewModel by viewModels {
+        factory
+    }
 
     private var _binding: FragmentFavoriteBinding?= null
     private val binding get() =_binding!!
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFavoriteBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -39,9 +50,6 @@ class FavoriteFragment : Fragment() {
                 intent.putExtra(DetailMovieActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
-
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            favoriteViewModel = ViewModelProvider(this,factory)[FavoriteViewModel::class.java]
 
             favoriteViewModel.favoriteMovie.observe(viewLifecycleOwner) { dataMovie ->
                 movieAdapter.setData(dataMovie)

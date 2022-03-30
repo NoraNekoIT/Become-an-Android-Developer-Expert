@@ -1,31 +1,45 @@
 package com.noranekoit.made.submission1.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.noranekoit.made.submission1.MyApplication
 import com.noranekoit.made.submission1.R
 import com.noranekoit.made.submission1.core.data.Resource
 import com.noranekoit.made.submission1.core.ui.MovieAdapter
 import com.noranekoit.made.submission1.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.databinding.FragmentHomeBinding
 import com.noranekoit.made.submission1.detail.DetailMovieActivity
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
-    private lateinit var homeViewModel: HomeViewModel
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val homeViewModel: HomeViewModel by viewModels {
+        factory
+    }
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,8 +54,6 @@ class HomeFragment : Fragment() {
                 intent.putExtra(DetailMovieActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
             homeViewModel.movie.observe(viewLifecycleOwner) { movie ->
                 if (movie != null) {
@@ -62,7 +74,7 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            with(binding.rvMovie){
+            with(binding.rvMovie) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = movieAdapter
