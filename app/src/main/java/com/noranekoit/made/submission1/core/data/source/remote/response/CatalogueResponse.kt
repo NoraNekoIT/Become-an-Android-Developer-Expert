@@ -10,7 +10,7 @@ data class CatalogueResponse (
     val totalPages: Int?=null,
 
     @field:SerializedName("results")
-    val results: List<MovieResponse>? = null,
+    val results: List<MovieResponse>,
 
     @field:SerializedName("total_results")
     val totalResults: Int? = null

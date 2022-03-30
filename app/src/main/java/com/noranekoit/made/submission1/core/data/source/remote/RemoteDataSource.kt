@@ -7,37 +7,29 @@ import com.noranekoit.made.submission1.core.data.source.remote.network.ApiRespon
 import com.noranekoit.made.submission1.core.data.source.remote.network.ApiService
 import com.noranekoit.made.submission1.core.data.source.remote.response.CatalogueResponse
 import com.noranekoit.made.submission1.core.data.source.remote.response.MovieResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 
 class RemoteDataSource private constructor(private val apiService: ApiService) {
-    fun getMoviePopularAll(): LiveData<ApiResponse<List<MovieResponse>>> {
-        val resultData = MutableLiveData<ApiResponse<List<MovieResponse>>>()
-
-        val client = apiService.getMoviePopularAll()
-        client.enqueue(object : Callback<CatalogueResponse> {
-            override fun onResponse(
-                call: Call<CatalogueResponse>,
-                response: Response<CatalogueResponse>
-            ) {
-                val dataArray = response.body()?.results
-                resultData.value =
-                    if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
-
+    suspend fun getMoviePopularAll(): Flow<ApiResponse<List<MovieResponse>>> {
+        return flow {
+            try {
+                val response = apiService.getMoviePopularAll()
+                val dataArray = response.results
+                    if (dataArray.isNotEmpty()) emit(ApiResponse.Success(dataArray))
+                    else emit(ApiResponse.Empty)
+            }catch (e: Exception){
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource", "$e")
             }
-
-            override fun onFailure(call: Call<CatalogueResponse>, t: Throwable) {
-                Log.e("RemoteDataSource", "${t.message}")
-                resultData.postValue(
-                    ApiResponse.Error(
-                        t.message.toString()
-                    )
-                )
-            }
-        })
-        return resultData
+        }.flowOn(Dispatchers.IO)
     }
 
     companion object {
@@ -46,9 +38,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
 
         fun getInstance(service: ApiService): RemoteDataSource =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(service).apply {
-                    instance = this
-                }
+                instance ?: RemoteDataSource(service)
             }
 
     }
