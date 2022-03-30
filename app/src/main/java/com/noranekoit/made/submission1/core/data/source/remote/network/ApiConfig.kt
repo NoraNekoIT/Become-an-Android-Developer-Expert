@@ -6,23 +6,32 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
-class ApiConfig {
-    companion object{
-        fun getApiService(): ApiService {
-            val client = OkHttpClient.Builder()
+object ApiConfig {
+
+        private fun provideOkHttpClient(): OkHttpClient{
             if (BuildConfig.DEBUG) {
-                val loggingInterceptor =
-                    HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-                client.addInterceptor(loggingInterceptor)
+                return OkHttpClient.Builder()
+                    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .connectTimeout(120, TimeUnit.SECONDS)
+                    .readTimeout(120, TimeUnit.SECONDS)
                     .build()
             }
+            return OkHttpClient.Builder()
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE))
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
+                .build()
+        }
+
+        fun provideApiService(): ApiService {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL_TMDB)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client.build())
+                .client(provideOkHttpClient())
                 .build()
             return retrofit.create(ApiService::class.java)
         }
-    }
+
 }
