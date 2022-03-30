@@ -1,7 +1,7 @@
 package com.noranekoit.made.submission1.di
 
-import com.noranekoit.made.submission1.core.domain.usecase.MovieInteractor
-import com.noranekoit.made.submission1.core.domain.usecase.MovieUseCase
+import com.noranekoit.made.core.domain.usecase.MovieInteractor
+import com.noranekoit.made.core.domain.usecase.MovieUseCase
 import dagger.Binds
 import dagger.Module
 

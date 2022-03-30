@@ -1,22 +1,25 @@
 package com.noranekoit.made.submission1.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.noranekoit.made.core.domain.model.Moviem
+import com.noranekoit.made.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.BuildConfig
 import com.noranekoit.made.submission1.MyApplication
 import com.noranekoit.made.submission1.R
-import com.noranekoit.made.submission1.core.domain.model.Moviem
-import com.noranekoit.made.submission1.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.databinding.ActivityDetailMovieBinding
+import javax.inject.Inject
 
 class DetailMovieActivity : AppCompatActivity() {
     companion object{
         const val EXTRA_DATA ="extra_data"
     }
-    private lateinit var factory: ViewModelFactory
+
+    @Inject
+    lateinit var factory: ViewModelFactory
 
     private val detailMovieViewModel: DetailMovieViewModel by viewModels {
         factory

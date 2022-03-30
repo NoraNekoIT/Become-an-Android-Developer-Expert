@@ -1,6 +1,5 @@
 package com.noranekoit.made.submission1.di
-
-import com.noranekoit.made.submission1.core.di.CoreComponent
+import com.noranekoit.made.core.di.CoreComponent
 import com.noranekoit.made.submission1.detail.DetailMovieActivity
 import com.noranekoit.made.submission1.favorite.FavoriteFragment
 import com.noranekoit.made.submission1.home.HomeFragment

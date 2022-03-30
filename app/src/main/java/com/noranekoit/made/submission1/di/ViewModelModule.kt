@@ -2,7 +2,7 @@ package com.noranekoit.made.submission1.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.noranekoit.made.submission1.core.ui.ViewModelFactory
+import com.noranekoit.made.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.detail.DetailMovieViewModel
 import com.noranekoit.made.submission1.favorite.FavoriteViewModel
 import com.noranekoit.made.submission1.home.HomeViewModel

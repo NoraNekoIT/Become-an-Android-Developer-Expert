@@ -17,10 +17,11 @@
         <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission1/app/src/main/res/layout/view_empty.xml" value="0.1" />
         <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission1/app/src/main/res/layout/view_error.xml" value="0.1" />
         <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission1/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission1/core/src/main/res/layout/item_list_movie.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

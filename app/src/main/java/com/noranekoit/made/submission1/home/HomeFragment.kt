@@ -11,9 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noranekoit.made.submission1.MyApplication
 import com.noranekoit.made.submission1.R
-import com.noranekoit.made.submission1.core.data.Resource
-import com.noranekoit.made.submission1.core.ui.MovieAdapter
-import com.noranekoit.made.submission1.core.ui.ViewModelFactory
+import com.noranekoit.made.core.ui.MovieAdapter
+import com.noranekoit.made.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.databinding.FragmentHomeBinding
 import com.noranekoit.made.submission1.detail.DetailMovieActivity
 import javax.inject.Inject
@@ -58,12 +57,12 @@ class HomeFragment : Fragment() {
             homeViewModel.movie.observe(viewLifecycleOwner) { movie ->
                 if (movie != null) {
                     when (movie) {
-                        is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                        is Resource.Success -> {
+                        is com.noranekoit.made.core.data.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                        is com.noranekoit.made.core.data.Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             movieAdapter.setData(movie.data)
                         }
-                        is Resource.Error -> {
+                        is com.noranekoit.made.core.data.Resource.Error -> {
                             binding.progressBar.visibility = ViewGroup.GONE
                             binding.viewError.root.visibility = View.VISIBLE
                             binding.viewError.tvError.text = movie.message ?: getString(

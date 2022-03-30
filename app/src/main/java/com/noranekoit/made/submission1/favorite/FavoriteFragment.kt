@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.noranekoit.made.core.ui.MovieAdapter
+import com.noranekoit.made.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.MyApplication
-import com.noranekoit.made.submission1.core.ui.MovieAdapter
-import com.noranekoit.made.submission1.core.ui.ViewModelFactory
 import com.noranekoit.made.submission1.databinding.FragmentFavoriteBinding
 import com.noranekoit.made.submission1.detail.DetailMovieActivity
 import javax.inject.Inject
