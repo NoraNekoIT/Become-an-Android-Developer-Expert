@@ -57,7 +57,8 @@ class HomeFragment : Fragment() {
             homeViewModel.movie.observe(viewLifecycleOwner) { movie ->
                 if (movie != null) {
                     when (movie) {
-                        is com.noranekoit.made.core.data.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                        is com.noranekoit.made.core.data.Resource.Loading -> binding.progressBar.visibility =
+                            View.VISIBLE
                         is com.noranekoit.made.core.data.Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             movieAdapter.setData(movie.data)

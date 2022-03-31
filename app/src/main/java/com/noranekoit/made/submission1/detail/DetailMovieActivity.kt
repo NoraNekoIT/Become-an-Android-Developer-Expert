@@ -14,8 +14,8 @@ import com.noranekoit.made.submission1.databinding.ActivityDetailMovieBinding
 import javax.inject.Inject
 
 class DetailMovieActivity : AppCompatActivity() {
-    companion object{
-        const val EXTRA_DATA ="extra_data"
+    companion object {
+        const val EXTRA_DATA = "extra_data"
     }
 
     @Inject
@@ -36,7 +36,7 @@ class DetailMovieActivity : AppCompatActivity() {
         showDetailMovie(detailMovie)
     }
 
-    private fun showDetailMovie(detailMovie: Moviem?){
+    private fun showDetailMovie(detailMovie: Moviem?) {
         detailMovie?.let {
             supportActionBar?.title = detailMovie.title
             binding.content.tvDetailDescription.text = detailMovie.description
@@ -48,17 +48,27 @@ class DetailMovieActivity : AppCompatActivity() {
             setStatusFavorite(statusFavorite)
             binding.fab.setOnClickListener {
                 statusFavorite = !statusFavorite
-                detailMovieViewModel.setFavoriteMovie(detailMovie,statusFavorite)
+                detailMovieViewModel.setFavoriteMovie(detailMovie, statusFavorite)
                 setStatusFavorite(statusFavorite)
             }
         }
     }
 
-    private fun setStatusFavorite(statusFavorite: Boolean){
-        if (statusFavorite){
-            binding.fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white))
-        }else{
-            binding.fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_not_favorite_white))
+    private fun setStatusFavorite(statusFavorite: Boolean) {
+        if (statusFavorite) {
+            binding.fab.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_favorite_white
+                )
+            )
+        } else {
+            binding.fab.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_not_favorite_white
+                )
+            )
         }
     }
 }

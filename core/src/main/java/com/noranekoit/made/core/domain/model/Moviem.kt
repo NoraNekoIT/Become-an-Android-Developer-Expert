@@ -1,6 +1,8 @@
 package com.noranekoit.made.core.domain.model
+
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+
 @Parcelize
 data class Moviem(
     val id: String,
@@ -9,5 +11,5 @@ data class Moviem(
     val dateAiring: String?,
     val score: String?,
     val imagePath: String?,
-    var isFavorite: Boolean =false
-): Parcelable
+    var isFavorite: Boolean = false
+) : Parcelable

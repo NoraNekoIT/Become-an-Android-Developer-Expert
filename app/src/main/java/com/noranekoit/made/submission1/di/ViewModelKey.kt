@@ -3,6 +3,7 @@ package com.noranekoit.made.submission1.di
 import androidx.lifecycle.ViewModel
 import dagger.MapKey
 import kotlin.reflect.KClass
+
 @MustBeDocumented
 @Target(
     AnnotationTarget.FUNCTION,
@@ -12,4 +13,4 @@ import kotlin.reflect.KClass
 @Retention(AnnotationRetention.RUNTIME)
 
 @MapKey
-annotation class ViewModelKey (val value:KClass<out ViewModel>)
+annotation class ViewModelKey(val value: KClass<out ViewModel>)

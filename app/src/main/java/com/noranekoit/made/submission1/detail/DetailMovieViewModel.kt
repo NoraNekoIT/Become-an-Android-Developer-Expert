@@ -5,7 +5,8 @@ import com.noranekoit.made.core.domain.usecase.MovieUseCase
 import com.noranekoit.made.core.domain.model.Moviem
 import javax.inject.Inject
 
-class DetailMovieViewModel @Inject constructor(private val movieUseCase: MovieUseCase) : ViewModel() {
+class DetailMovieViewModel @Inject constructor(private val movieUseCase: MovieUseCase) :
+    ViewModel() {
     fun setFavoriteMovie(movie: Moviem, newStatus: Boolean) =
         movieUseCase.setFavoriteMovie(movie, newStatus)
 }

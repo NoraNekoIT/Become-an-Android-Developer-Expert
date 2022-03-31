@@ -1,4 +1,5 @@
 package com.noranekoit.made.core.data.source.remote.network
+
 import com.noranekoit.made.core.data.source.remote.response.CatalogueResponse
 import com.noranekoit.made.core.BuildConfig.TMDB_KEY as ApiKeyTMDB
 import retrofit2.http.GET

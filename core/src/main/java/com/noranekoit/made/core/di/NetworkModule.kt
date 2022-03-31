@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 @Module
 class NetworkModule {
     @Provides
-    fun provideOkHttpClient(): OkHttpClient{
+    fun provideOkHttpClient(): OkHttpClient {
         if (BuildConfig.DEBUG) {
             return OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -33,7 +33,7 @@ class NetworkModule {
         val retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL_TMDB)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(client )
+            .client(client)
             .build()
         return retrofit.create(ApiService::class.java)
     }

@@ -12,7 +12,7 @@ import javax.inject.Singleton
 )
 interface CoreComponent {
     @Component.Factory
-    interface Factory{
+    interface Factory {
         fun create(@BindsInstance context: Context): CoreComponent
     }
 

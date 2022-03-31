@@ -22,7 +22,7 @@ object DataMapper {
         return movieList
     }
 
-    fun mapEntitiesToDomain(input: List<MovieEntity>):List<Moviem> =
+    fun mapEntitiesToDomain(input: List<MovieEntity>): List<Moviem> =
         input.map {
             Moviem(
                 id = it.id,

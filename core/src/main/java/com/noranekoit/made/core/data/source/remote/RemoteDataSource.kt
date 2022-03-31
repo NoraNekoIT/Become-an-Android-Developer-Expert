@@ -19,9 +19,9 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
             try {
                 val response = apiService.getMoviePopularAll()
                 val dataArray = response.results
-                    if (dataArray.isNotEmpty()) emit(ApiResponse.Success(dataArray))
-                    else emit(ApiResponse.Empty)
-            }catch (e: Exception){
+                if (dataArray.isNotEmpty()) emit(ApiResponse.Success(dataArray))
+                else emit(ApiResponse.Empty)
+            } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
                 Log.e("RemoteDataSource", "$e")
             }

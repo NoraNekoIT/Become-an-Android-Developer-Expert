@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "movieEntities")
-data class MovieEntity (
+data class MovieEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "movieId")
@@ -31,5 +31,5 @@ data class MovieEntity (
     val imagePath: String?,
 
     @ColumnInfo(name = "isFavorite")
-    var isFavorite: Boolean =false
-):Parcelable
+    var isFavorite: Boolean = false
+) : Parcelable

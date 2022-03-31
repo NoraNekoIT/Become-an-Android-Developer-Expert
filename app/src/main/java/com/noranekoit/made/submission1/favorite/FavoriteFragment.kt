@@ -24,29 +24,29 @@ class FavoriteFragment : Fragment() {
         factory
     }
 
-    private var _binding: FragmentFavoriteBinding?= null
-    private val binding get() =_binding!!
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity().application as MyApplication).appComponent.inject(this)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoriteBinding.inflate(inflater,container,false)
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (activity != null){
+        if (activity != null) {
             val movieAdapter = MovieAdapter()
-            movieAdapter.onItemClick = {
-                selectedData ->
-                val intent = Intent(activity,DetailMovieActivity::class.java)
+            movieAdapter.onItemClick = { selectedData ->
+                val intent = Intent(activity, DetailMovieActivity::class.java)
                 intent.putExtra(DetailMovieActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
@@ -57,8 +57,8 @@ class FavoriteFragment : Fragment() {
                     if (dataMovie.isEmpty()) View.VISIBLE else View.GONE
             }
 
-            with(binding.rvMovie){
-                layoutManager =LinearLayoutManager(context)
+            with(binding.rvMovie) {
+                layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = movieAdapter
             }

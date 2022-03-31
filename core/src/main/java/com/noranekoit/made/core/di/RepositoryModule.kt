@@ -5,7 +5,7 @@ import com.noranekoit.made.core.domain.repository.IMovieRepository
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [NetworkModule::class,DatabaseModule::class])
+@Module(includes = [NetworkModule::class, DatabaseModule::class])
 abstract class RepositoryModule {
     @Binds
     abstract fun provideRepository(movieRepository: MovieRepository): IMovieRepository

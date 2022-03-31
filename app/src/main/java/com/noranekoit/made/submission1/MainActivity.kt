@@ -32,33 +32,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         binding.navView.setNavigationItemSelectedListener(this)
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment,HomeFragment())
+                .replace(R.id.nav_host_fragment, HomeFragment())
                 .commit()
             supportActionBar?.title = getString(R.string.app_name)
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var fragment: Fragment? =null
+        var fragment: Fragment? = null
         var title = getString(R.string.app_name)
-        when(item.itemId){
-           R.id.nav_home ->{
-               fragment = HomeFragment()
-               title =getString(R.string.app_name)
-           }
-            R.id.nav_favorite ->{
-                fragment =FavoriteFragment()
+        when (item.itemId) {
+            R.id.nav_home -> {
+                fragment = HomeFragment()
+                title = getString(R.string.app_name)
+            }
+            R.id.nav_favorite -> {
+                fragment = FavoriteFragment()
                 title = getString(R.string.menu_favorite)
             }
         }
-        if (fragment !=null){
+        if (fragment != null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.nav_host_fragment, fragment)
                 .commit()
         }
-        supportActionBar?.title =title
+        supportActionBar?.title = title
 
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
