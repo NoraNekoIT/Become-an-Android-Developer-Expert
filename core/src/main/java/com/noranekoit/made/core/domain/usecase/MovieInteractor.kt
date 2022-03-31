@@ -2,9 +2,8 @@ package com.noranekoit.made.core.domain.usecase
 
 import com.noranekoit.made.core.domain.model.Moviem
 import com.noranekoit.made.core.domain.repository.IMovieRepository
-import javax.inject.Inject
 
-class MovieInteractor @Inject constructor(private val movieRepository: IMovieRepository) :
+class MovieInteractor (private val movieRepository: IMovieRepository) :
     MovieUseCase {
     override fun getMoviePopularAll() = movieRepository.getMoviePopularAll()
 

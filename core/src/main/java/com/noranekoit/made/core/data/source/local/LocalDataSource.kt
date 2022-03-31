@@ -3,11 +3,8 @@ package com.noranekoit.made.core.data.source.local
 import com.noranekoit.made.core.data.source.local.entity.MovieEntity
 import com.noranekoit.made.core.data.source.local.room.MovieDao
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class LocalDataSource @Inject constructor(private val movieDao: MovieDao) {
+class LocalDataSource constructor(private val movieDao: MovieDao) {
 
     fun getAllMoviePopular(): Flow<List<MovieEntity>> = movieDao.getAllMovie()
 
