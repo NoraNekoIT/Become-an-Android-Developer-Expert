@@ -24,6 +24,5 @@ class AppExecutors @VisibleForTesting constructor(
         override fun execute(command: Runnable) {
             mainThreadHandler.post(command)
         }
-
     }
 }
