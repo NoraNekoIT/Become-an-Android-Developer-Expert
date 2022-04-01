@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.noranekoit.made.core.data.Resource
 import com.noranekoit.made.submission.R
 import com.noranekoit.made.core.ui.MovieAdapter
 import com.noranekoit.made.submission.databinding.FragmentHomeBinding
@@ -43,13 +44,13 @@ class HomeFragment : Fragment() {
             homeViewModel.movie.observe(viewLifecycleOwner) { movie ->
                 if (movie != null) {
                     when (movie) {
-                        is com.noranekoit.made.core.data.Resource.Loading -> binding.progressBar.visibility =
+                        is Resource.Loading -> binding.progressBar.visibility =
                             View.VISIBLE
-                        is com.noranekoit.made.core.data.Resource.Success -> {
+                        is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             movieAdapter.setData(movie.data)
                         }
-                        is com.noranekoit.made.core.data.Resource.Error -> {
+                        is Resource.Error -> {
                             binding.progressBar.visibility = ViewGroup.GONE
                             binding.viewError.root.visibility = View.VISIBLE
                             binding.viewError.tvError.text = movie.message ?: getString(

@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1155" />
+        <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission/app/src/main/res/drawable/ic_favorite_white.xml" value="0.1" />
         <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission/app/src/main/res/layout/activity_detail_movie.xml" value="0.33" />
-        <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission/app/src/main/res/layout/content_detail_movie.xml" value="0.33" />
+        <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission/app/src/main/res/layout/content_detail_movie.xml" value="0.22" />
         <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission/app/src/main/res/layout/fragment_home.xml" value="0.1259259259259259" />
         <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission/core/src/main/res/layout/item_list_movie.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/bunsm/Desktop/Belajar/dicodingandroidexpert/submission/favorite/src/main/res/layout/activity_favorite.xml" value="0.19947916666666668" />
