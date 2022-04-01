@@ -11,9 +11,6 @@ import com.noranekoit.made.submission.databinding.ActivityDetailMovieBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailMovieActivity : AppCompatActivity() {
-    companion object {
-        const val EXTRA_DATA = "extra_data"
-    }
 
     private val detailMovieViewModel: DetailMovieViewModel by viewModel()
     private lateinit var binding: ActivityDetailMovieBinding
@@ -70,4 +67,9 @@ class DetailMovieActivity : AppCompatActivity() {
             )
         }
     }
+
+    companion object {
+        const val EXTRA_DATA = "extra_data"
+    }
+
 }
