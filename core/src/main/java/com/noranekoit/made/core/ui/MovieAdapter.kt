@@ -3,12 +3,14 @@ package com.noranekoit.made.core.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.noranekoit.made.core.BuildConfig
 import com.noranekoit.made.core.R
 import com.noranekoit.made.core.databinding.ItemListMovieBinding
 import com.noranekoit.made.core.domain.model.Moviem
+import com.noranekoit.made.core.utils.DiffUtilHelper
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
     private var listData = ArrayList<Moviem>()
@@ -16,9 +18,13 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
 
     fun setData(newListData: List<Moviem>?) {
         if (newListData == null) return
+        val diffUtilHelper = DiffUtilHelper(listData,newListData)
+        val diffResult = DiffUtil.calculateDiff(diffUtilHelper)
         listData.clear()
         listData.addAll(newListData)
-        notifyDataSetChanged()
+
+        diffResult.dispatchUpdatesTo(this)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ListViewHolder =

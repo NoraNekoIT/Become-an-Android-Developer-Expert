@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Moe App</string>
 
     <string name="date_airing">Date Airing %s</string>
@@ -9,7 +9,7 @@
     <string name="menu_favorite">Favorite</string>
 
     <string name="title_activity_detail_home">DetailHomeActivity</string>
-    <string name="no_data">Empty data</string>
+    <string name="no_data" tools:keep="@string/no_data">Empty data</string>
     <string name="something_wrong">Oops.. something went wrong</string>
     <string name="title_favorite">favorite</string>
 </resources>
