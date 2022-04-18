@@ -20,16 +20,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val databaseModule = module{
-    factory{
+val databaseModule = module {
+    factory {
         get<MovieDatabase>().movieDao()
     }
     single {
-        val passphrase:ByteArray = SQLiteDatabase.getBytes("noranekoit".toCharArray())
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("noranekoit".toCharArray())
         val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
-            MovieDatabase::class.java,"Movie.db"
+            MovieDatabase::class.java, "Movie.db"
         ).fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
@@ -40,9 +40,9 @@ val networkModule = module {
     single {
         val hostname = "api.themoviedb.org"
         val certificatePinner = CertificatePinner.Builder()
-            .add(hostname,"sha256/oD/WAoRPvbez1Y2dfYfuo4yujAcYHXdv1Ivb2v2MOKk=")
-            .add(hostname,"sha256/JSMzqOOrtyOT1kmau6zKhgT676hGgczD5VMdRMyJZFA=")
-            .add(hostname,"sha256/++MBgDH5WGvL9Bcn5Be30cRcL0f5O+NyoXuWtQdX1aI=")
+            .add(hostname, "sha256/oD/WAoRPvbez1Y2dfYfuo4yujAcYHXdv1Ivb2v2MOKk=")
+            .add(hostname, "sha256/JSMzqOOrtyOT1kmau6zKhgT676hGgczD5VMdRMyJZFA=")
+            .add(hostname, "sha256/++MBgDH5WGvL9Bcn5Be30cRcL0f5O+NyoXuWtQdX1aI=")
             .build()
         if (BuildConfig.DEBUG) {
             OkHttpClient.Builder()
@@ -73,5 +73,5 @@ val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
-    single<IMovieRepository> { MovieRepository(get(),get(),get()) }
+    single<IMovieRepository> { MovieRepository(get(), get(), get()) }
 }
