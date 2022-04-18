@@ -18,13 +18,11 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
 
     fun setData(newListData: List<Moviem>?) {
         if (newListData == null) return
-        val diffUtilHelper = DiffUtilHelper(listData,newListData)
+        val diffUtilHelper = DiffUtilHelper(listData, newListData)
         val diffResult = DiffUtil.calculateDiff(diffUtilHelper)
         listData.clear()
         listData.addAll(newListData)
-
         diffResult.dispatchUpdatesTo(this)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ListViewHolder =
