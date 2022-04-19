@@ -7,9 +7,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_favorite">Favorite</string>
-
-    <string name="title_activity_detail_home">DetailHomeActivity</string>
+    <string name="title_favorite">Favorite</string>
     <string name="no_data" tools:keep="@string/no_data">Empty data</string>
     <string name="something_wrong">Oops.. something went wrong</string>
-    <string name="title_favorite">favorite</string>
 </resources>
