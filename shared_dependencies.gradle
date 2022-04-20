@@ -20,4 +20,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+
 }

@@ -44,8 +44,16 @@ android {
         viewBinding = true
     }
     dynamicFeatures = [':favorite']
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src\\main\\assets', 'src\\main\\res\\assets'
+            }
+        }
+    }
 }
 
 dependencies {
     implementation project(":core")
+    implementation "com.facebook.shimmer:shimmer:0.5.0"
 }
