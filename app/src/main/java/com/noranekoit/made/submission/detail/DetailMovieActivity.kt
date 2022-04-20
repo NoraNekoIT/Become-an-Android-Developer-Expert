@@ -3,11 +3,11 @@ package com.noranekoit.made.submission.detail
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.noranekoit.made.core.BuildConfig
 import com.noranekoit.made.core.domain.model.Moviem
 import com.noranekoit.made.submission.R
 import com.noranekoit.made.submission.databinding.ActivityDetailMovieBinding
+import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailMovieActivity : AppCompatActivity() {
@@ -36,7 +36,7 @@ class DetailMovieActivity : AppCompatActivity() {
                     resources.getString(R.string.date_airing, detailMovie.dateAiring)
                 tvDetailRating.rating = scoreRating
             }
-            Glide.with(this@DetailMovieActivity)
+            Picasso.get()
                 .load("${BuildConfig.BASE_URL_IMAGE}${detailMovie.imagePath}")
                 .into(binding.ivDetailImage)
 
